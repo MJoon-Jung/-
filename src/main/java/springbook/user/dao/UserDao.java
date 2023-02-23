@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import springbook.user.domain.User;
 
 public class UserDao {
-    private final NConnectionMaker connectionMaker;
+    private final ConnectionMaker connectionMaker;
 
-    public UserDao() {
-        this.connectionMaker = new NConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
