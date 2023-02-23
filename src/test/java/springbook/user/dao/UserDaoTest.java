@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import springbook.user.domain.User;
 
 class UserDaoTest {
-    private UserDao dao = new UserDao();
+    private UserDao dao = new NUserDao();
 
     @BeforeEach
     void beforeEach() throws SQLException, ClassNotFoundException {
