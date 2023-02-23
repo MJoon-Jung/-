@@ -6,9 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import springbook.user.domain.User;
 
-public abstract class UserDao {
+public class UserDao {
+    private final SimpleConnectionMaker simpleConnectionMaker;
+
+    public UserDao() {
+        this.simpleConnectionMaker = new SimpleConnectionMaker();
+    }
+
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection con = getConnection();
+        Connection con = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement pstmt = con.prepareStatement(
                 "INSERT INTO USERS(id, name, password) VALUES(?, ?, ?)");
@@ -23,7 +29,7 @@ public abstract class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection con = getConnection();
+        Connection con = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement pstmt = con.prepareStatement("SELECT * FROM USERS WHERE id=?");
         pstmt.setString(1, id);
@@ -43,7 +49,7 @@ public abstract class UserDao {
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
-        Connection con = getConnection();
+        Connection con = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement pstmt = con.prepareStatement("DELETE FROM USERS");
         pstmt.executeUpdate();
@@ -51,6 +57,4 @@ public abstract class UserDao {
         pstmt.close();
         con.close();
     }
-
-    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }
