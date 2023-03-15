@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import springbook.user.domain.User;
 
 class UserDaoTest {
-    private ConnectionMaker connectionMaker = new DConnectionMaker();
-    private UserDao dao = new UserDao(connectionMaker);
+    private UserDao dao = new DaoFactory().userDao();
 
     @BeforeEach
     void beforeEach() throws SQLException, ClassNotFoundException {
