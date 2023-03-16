@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import springbook.user.domain.User;
 
 class UserDaoTest {
@@ -14,8 +14,7 @@ class UserDaoTest {
 
     @BeforeEach
     void beforeEach() throws SQLException, ClassNotFoundException {
-        ApplicationContext context = new AnnotationConfigApplicationContext(
-                DaoFactory.class);
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
         dao = context.getBean("userDao", UserDao.class);
         dao.deleteAll();
     }
