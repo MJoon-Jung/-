@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springbook.user.domain.User;
 
 class UserDaoTest {
@@ -12,6 +14,9 @@ class UserDaoTest {
 
     @BeforeEach
     void beforeEach() throws SQLException, ClassNotFoundException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(
+                DaoFactory.class);
+        dao = context.getBean("userDao", UserDao.class);
         dao.deleteAll();
     }
 
