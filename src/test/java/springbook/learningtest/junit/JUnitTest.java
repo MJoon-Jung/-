@@ -1,5 +1,9 @@
 package springbook.learningtest.junit;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.HashSet;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,18 +13,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @Configuration
-class EmptyConfiguration {}
+class EmptyConfiguration {
+}
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = EmptyConfiguration.class)
 public class JUnitTest {
-    @Autowired ApplicationContext context;
+    @Autowired
+    ApplicationContext context;
 
     static Set<JUnitTest> testObjects = new HashSet<JUnitTest>();
     static ApplicationContext contextObject = null;
@@ -34,7 +35,8 @@ public class JUnitTest {
         contextObject = this.context;
     }
 
-    @Test public void test2() {
+    @Test
+    public void test2() {
         assertThat(testObjects).doesNotContain(this);
         testObjects.add(this);
 
@@ -42,7 +44,8 @@ public class JUnitTest {
         contextObject = this.context;
     }
 
-    @Test public void test3() {
+    @Test
+    public void test3() {
         assertThat(testObjects).doesNotContain(this);
         testObjects.add(this);
 

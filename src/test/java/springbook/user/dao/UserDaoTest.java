@@ -10,7 +10,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import springbook.user.domain.User;
 
 class UserDaoTest {
-    private UserDao dao = new DaoFactory().userDao();
+    private UserDao dao;
 
     @BeforeEach
     void beforeEach() throws SQLException, ClassNotFoundException {
